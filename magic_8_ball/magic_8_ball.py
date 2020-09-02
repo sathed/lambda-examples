@@ -4,7 +4,7 @@ import time
 
 
 seconds_since_epoch = calendar.timegm(time.gmtime())
-def handler_name(event, context):
+def magic_8_ball(event, context):
     seed(seconds_since_epoch)
 
     switch = {
@@ -19,4 +19,10 @@ def handler_name(event, context):
         9: "You may rely on, it"
     }
 
-    return switch[randint(1, len(switch))]
+    answer = switch[randint(1, len(switch))]
+    if 'question' in event:
+        print(f"{event['question']} \n{answer}")
+    else:
+        print(f"{answer}")
+
+    return 0
